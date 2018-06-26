@@ -3,5 +3,6 @@
 S3method("[",pthresh)
 export(pgs.pthresh)
 export(pthresh.pipeline)
+export(pval.thresh)
 importFrom(Rcpp,evalCpp)
 useDynLib(crosspred)

@@ -1,6 +1,6 @@
 clear()
 Tim.load(Rplink)
-setwd(attachroot("~/WORK/Projects/validation/pthresh/tests"))
+setwd(attachroot("~/WORK/Projects/validation/crosspred/tests"))
 Tim.load(lassosum)
 load_all()
 

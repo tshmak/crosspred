@@ -3,10 +3,10 @@
 
 #' Mutiply a bed file with a vector with p-value thresholds bins
 multiBed4 <- function(fileName, N, P, weights, pbin, nbin, col_skip_pos, col_skip, keepbytes, keepoffset) {
-    .Call('_pthresh_multiBed4', PACKAGE = 'pthresh', fileName, N, P, weights, pbin, nbin, col_skip_pos, col_skip, keepbytes, keepoffset)
+    .Call('_crosspred_multiBed4', PACKAGE = 'crosspred', fileName, N, P, weights, pbin, nbin, col_skip_pos, col_skip, keepbytes, keepoffset)
 }
 
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
-    .Call('_pthresh_RcppExport_registerCCallable', PACKAGE = 'pthresh')
+    .Call('_crosspred_RcppExport_registerCCallable', PACKAGE = 'crosspred')
 })

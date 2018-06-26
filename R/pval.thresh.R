@@ -2,7 +2,7 @@ pval.thresh <- function(pvals, p.thresholds, beta, bfile,
                         keep=NULL, remove=NULL, extract=NULL, exclude=NULL,
                         chr=NULL, cluster=NULL, trace=0) {
   #' Fast way to do p-value thresholding (without looping over the thresholds)
-  #' @keywords internal
+  #' @export
   beta <- as.vector(beta)
   stopifnot(is.vector(pvals) & is.vector(beta))
   stopifnot(length(pvals) == length(beta))

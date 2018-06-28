@@ -42,7 +42,7 @@ pthresh.pipeline <- function(beta=cor, pvals,
                     p.thresholds = p.thresholds,
                     bfile=test.bfile, keep = keep.test,
                     extract=results$test.extract,
-                    cluster = cluster, trace=trace)
+                    cluster = cluster, trace=trace-1)
 
   ### Save results ###
   results$beta <- list(pthresh=attr(pt, "beta"))

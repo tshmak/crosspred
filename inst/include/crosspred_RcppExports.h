@@ -25,11 +25,11 @@ namespace crosspred {
         }
     }
 
-    inline arma::mat multiBed4(const std::string fileName, int N, int P, const arma::vec weights, arma::Col<int> pbin, int nbin, const arma::Col<int> col_skip_pos, const arma::Col<int> col_skip, const arma::Col<int> keepbytes, const arma::Col<int> keepoffset, const bool trace) {
+    inline arma::mat multiBed4(const std::string fileName, int N, int P, const arma::vec weights, arma::Col<int> pbin, int nbin, const arma::Col<int> col_skip_pos, const arma::Col<int> col_skip, const arma::Col<int> keepbytes, const arma::Col<int> keepoffset, const int trace) {
         typedef SEXP(*Ptr_multiBed4)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_multiBed4 p_multiBed4 = NULL;
         if (p_multiBed4 == NULL) {
-            validateSignature("arma::mat(*multiBed4)(const std::string,int,int,const arma::vec,arma::Col<int>,int,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const bool)");
+            validateSignature("arma::mat(*multiBed4)(const std::string,int,int,const arma::vec,arma::Col<int>,int,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const int)");
             p_multiBed4 = (Ptr_multiBed4)R_GetCCallable("crosspred", "_crosspred_multiBed4");
         }
         RObject rcpp_result_gen;

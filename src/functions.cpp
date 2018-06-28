@@ -155,8 +155,9 @@ arma::mat multiBed4(const std::string fileName, int N, int P,
   double step;
   double Step = 0; 
   if(trace > 0) {
-    chunk = weights.n_elem / 10^trace; 
-    step = 100 / (10^trace); 
+    chunk = weights.n_elem / pow(10,trace); 
+    step = 100 / pow(10,trace); 
+    // Rcout << chunk << " " << step << " " << trace << " " << (10^trace) << "\n"; 
     // Rcout << "Started C++ program \n"; 
   }
   
@@ -175,8 +176,8 @@ arma::mat multiBed4(const std::string fileName, int N, int P,
     
     if(trace > 0) {
       if (iii % chunk == 0) {
-        Rcout << Step << "% done";
-        double Step = Step + step; 
+        Rcout << Step << "% done\n";
+        Step = Step + step; 
       }
     }
     

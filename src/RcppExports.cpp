@@ -10,7 +10,7 @@
 using namespace Rcpp;
 
 // multiBed4
-arma::mat multiBed4(const std::string fileName, int N, int P, const arma::vec weights, arma::Col<int> pbin, int nbin, const arma::Col<int> col_skip_pos, const arma::Col<int> col_skip, const arma::Col<int> keepbytes, const arma::Col<int> keepoffset, const bool trace);
+arma::mat multiBed4(const std::string fileName, int N, int P, const arma::vec weights, arma::Col<int> pbin, int nbin, const arma::Col<int> col_skip_pos, const arma::Col<int> col_skip, const arma::Col<int> keepbytes, const arma::Col<int> keepoffset, const int trace);
 static SEXP _crosspred_multiBed4_try(SEXP fileNameSEXP, SEXP NSEXP, SEXP PSEXP, SEXP weightsSEXP, SEXP pbinSEXP, SEXP nbinSEXP, SEXP col_skip_posSEXP, SEXP col_skipSEXP, SEXP keepbytesSEXP, SEXP keepoffsetSEXP, SEXP traceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -24,7 +24,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const arma::Col<int> >::type col_skip(col_skipSEXP);
     Rcpp::traits::input_parameter< const arma::Col<int> >::type keepbytes(keepbytesSEXP);
     Rcpp::traits::input_parameter< const arma::Col<int> >::type keepoffset(keepoffsetSEXP);
-    Rcpp::traits::input_parameter< const bool >::type trace(traceSEXP);
+    Rcpp::traits::input_parameter< const int >::type trace(traceSEXP);
     rcpp_result_gen = Rcpp::wrap(multiBed4(fileName, N, P, weights, pbin, nbin, col_skip_pos, col_skip, keepbytes, keepoffset, trace));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
@@ -54,7 +54,7 @@ RcppExport SEXP _crosspred_multiBed4(SEXP fileNameSEXP, SEXP NSEXP, SEXP PSEXP, 
 static int _crosspred_RcppExport_validate(const char* sig) { 
     static std::set<std::string> signatures;
     if (signatures.empty()) {
-        signatures.insert("arma::mat(*multiBed4)(const std::string,int,int,const arma::vec,arma::Col<int>,int,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const bool)");
+        signatures.insert("arma::mat(*multiBed4)(const std::string,int,int,const arma::vec,arma::Col<int>,int,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const int)");
     }
     return signatures.find(sig) != signatures.end();
 }

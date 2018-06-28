@@ -22,7 +22,7 @@ pthresh.pipeline <- function(beta=cor, pvals,
   ### Checks ###
   if(missing(pvals)) pvals <- attr(beta, "pvals")
   if(is.null("pvals")) stop("pvals must be given.")
-  if(destandardize) stop("destandardization not supported in pthresh.pipeline.")
+  # if(destandardize) stop("destandardization not supported in pthresh.pipeline.")
   
   ### Parse ###
   results <- lassosum.pipeline(cor = beta, chr=chr, pos=pos, snp=snp,
@@ -30,7 +30,7 @@ pthresh.pipeline <- function(beta=cor, pvals,
                              trace=trace, exclude.ambiguous = exclude.ambiguous,
                              keep.test=keep.test, remove.test=remove.test,
                              destandardize = destandardize,
-                             s=numeric(0), ...)
+                             s=numeric(0), ...) # This is just for parsing!!!
   ss <- results$sumstats
 
   ### pval.thresh ###
@@ -38,6 +38,13 @@ pthresh.pipeline <- function(beta=cor, pvals,
   Beta <- ss$cor
   Pvals <- pvals[ss$order]
 
+  ### destandardize ###
+  if(destandardize) {
+    sd <- sd.bfile(bfile=test.bfile, keep=results$keep.test, 
+                   extract = results$test.extract)
+    Beta <- Beta / sd
+    Beta[is.infinite(Beta)] <- 0
+  }
   pt <- pval.thresh(beta=Beta, pvals = Pvals,
                     p.thresholds = p.thresholds,
                     bfile=test.bfile, keep = keep.test,

@@ -18,7 +18,7 @@ pval.thresh <- function(pvals, p.thresholds, beta, bfile,
   class(obj) <- "pthresh"
 
   result <- pgs(weights = obj, bfile=bfile, keep=parsed$keep, extract=parsed$extract,
-                cluster=cluster)
+                cluster=cluster, trace=trace)
 
   attr(result, "beta") <- obj
 

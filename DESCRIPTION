@@ -11,6 +11,8 @@ Encoding: UTF-8
 LazyData: true
 Includes: Rcpp
 LinkingTo: Rcpp, RcppArmadillo
+Depends: 
+    lassosum
 Imports:
     Rcpp (>= 0.11.0)
 Suggests:

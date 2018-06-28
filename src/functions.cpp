@@ -120,7 +120,8 @@ bool openPlinkBinaryFile(const std::string s, std::ifstream &BIT) {
 arma::mat multiBed4(const std::string fileName, int N, int P,
                     const arma::vec weights, arma::Col<int> pbin, int nbin,
                     const arma::Col<int> col_skip_pos, const arma::Col<int> col_skip,
-                    const arma::Col<int> keepbytes, const arma::Col<int> keepoffset) {
+                    const arma::Col<int> keepbytes, const arma::Col<int> keepoffset, 
+                    const int trace) {
 
   // Similar to multiBed3 but only for p-value thresholding
 
@@ -150,6 +151,15 @@ arma::mat multiBed4(const std::string fileName, int N, int P,
   std::bitset<8> b; // Initiate the bit array
   char ch[Nbytes];
 
+  int chunk;
+  double step;
+  double Step = 0; 
+  if(trace > 0) {
+    chunk = weights.n_elem / 10^trace; 
+    step = 100 / (10^trace); 
+    // Rcout << "Started C++ program \n"; 
+  }
+  
   while (i < P) {
     Rcpp::checkUserInterrupt();
     if (colskip) {
@@ -162,7 +172,14 @@ arma::mat multiBed4(const std::string fileName, int N, int P,
         }
       }
     }
-
+    
+    if(trace > 0) {
+      if (iii % chunk == 0) {
+        Rcout << Step << "% done";
+        double Step = Step + step; 
+      }
+    }
+    
     bedFile.read(ch, Nbytes); // Read the information
     if (!bedFile)
       throw std::runtime_error(

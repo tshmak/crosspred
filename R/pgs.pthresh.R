@@ -13,7 +13,7 @@
 
 #' @export
 pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, remove=NULL,
-                   chr=NULL, cluster=NULL) {
+                   chr=NULL, cluster=NULL, trace=0) {
 
   beta <- weights$beta
   pbin <- weights$pbin
@@ -49,10 +49,11 @@ pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, r
         f <- 1e8 / compute.size
         recommended <- min(ceiling(nclusters / f), nclusters - 1)
         return(pgs(weights, bfile, keep=parsed$keep, extract=parsed$extract,
-                   cluster=cluster[1:recommended]))
+                   cluster=cluster[1:recommended], trace=trace))
       }
       Bfile <- bfile # Define this within the function so that it is copied
                       # to the child processes
+      if(trace > 0) cat("Divided into", nclusters, "chunks\n")
       l <- parallel::parLapply(cluster, 1:nclusters, function(i) {
         toextract <- if(!is.null(parsed$extract)) parsed$extract else
           rep(TRUE, parsed$P)
@@ -63,7 +64,7 @@ pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, r
         obj$beta <- beta[touse]
         obj$pbin <- pbin[touse]
 
-        return(pgs(obj, Bfile, keep=parsed$keep, extract=toextract))
+        return(pgs(obj, Bfile, keep=parsed$keep, extract=toextract, trace=trace))
       })
       result <- l[[1]]
       if(nclusters > 1) for(i in 2:nclusters) result <- result + l[[i]]
@@ -92,7 +93,7 @@ pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, r
   return(multiBed4(bfile, parsed$N, parsed$P,
                    beta, pbin, nbin,
                    extract2[[1]], extract2[[2]],
-                   keepbytes, keepoffset))
+                   keepbytes, keepoffset, trace = trace))
 
   #' @return A matrix of Polygenic Scores
 

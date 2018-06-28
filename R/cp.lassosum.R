@@ -16,6 +16,7 @@ cp.lassosum <- function(cp.plink.linear,
                         cluster=NULL, 
                         list.of.lpipe.output=FALSE, 
                         list.of.lpipe.input=NULL, 
+                        pipeline.FUN=lassosum.pipeline, 
                         ...) {
   #' @title lassosum with cross-prediction
   #' @description We assume correlations are pre-calculated for the various 
@@ -108,7 +109,7 @@ cp.lassosum <- function(cp.plink.linear,
         #   stop("There seems to be a lot of NA's in the correlations...")
         # }
         ss$cor[[i]][na] <- 0
-        l[[i]] <- lassosum.pipeline(cor=ss$cor[[i]], 
+        l[[i]] <- pipeline.FUN(cor=ss$cor[[i]], 
                                     chr=ss$chr, 
                                     pos=ss$pos,
                                     snp=ss$snp,

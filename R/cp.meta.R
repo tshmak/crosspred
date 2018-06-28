@@ -49,6 +49,9 @@ cp.meta <- function(cp.plink.linear,
   stopifnot(is.null(A1) || length(A1) == length(cor))
   stopifnot(is.null(A2) || length(A2) == length(cor))
   
+  if(length(n) > 1) {
+    stop("n should be a constant. Use nonmiss for a vector of number of non-missing observations.")
+  }
   
   ### ss ###
   ss <- list(chr=chr, pos=pos, A1=A1, A2=A2, snp=snp, cor=cor)

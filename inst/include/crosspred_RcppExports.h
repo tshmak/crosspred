@@ -25,17 +25,17 @@ namespace crosspred {
         }
     }
 
-    inline arma::mat multiBed4(const std::string fileName, int N, int P, const arma::vec weights, arma::Col<int> pbin, int nbin, const arma::Col<int> col_skip_pos, const arma::Col<int> col_skip, const arma::Col<int> keepbytes, const arma::Col<int> keepoffset) {
-        typedef SEXP(*Ptr_multiBed4)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+    inline arma::mat multiBed4(const std::string fileName, int N, int P, const arma::vec weights, arma::Col<int> pbin, int nbin, const arma::Col<int> col_skip_pos, const arma::Col<int> col_skip, const arma::Col<int> keepbytes, const arma::Col<int> keepoffset, const bool trace) {
+        typedef SEXP(*Ptr_multiBed4)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_multiBed4 p_multiBed4 = NULL;
         if (p_multiBed4 == NULL) {
-            validateSignature("arma::mat(*multiBed4)(const std::string,int,int,const arma::vec,arma::Col<int>,int,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>)");
+            validateSignature("arma::mat(*multiBed4)(const std::string,int,int,const arma::vec,arma::Col<int>,int,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const arma::Col<int>,const bool)");
             p_multiBed4 = (Ptr_multiBed4)R_GetCCallable("crosspred", "_crosspred_multiBed4");
         }
         RObject rcpp_result_gen;
         {
             RNGScope RCPP_rngScope_gen;
-            rcpp_result_gen = p_multiBed4(Shield<SEXP>(Rcpp::wrap(fileName)), Shield<SEXP>(Rcpp::wrap(N)), Shield<SEXP>(Rcpp::wrap(P)), Shield<SEXP>(Rcpp::wrap(weights)), Shield<SEXP>(Rcpp::wrap(pbin)), Shield<SEXP>(Rcpp::wrap(nbin)), Shield<SEXP>(Rcpp::wrap(col_skip_pos)), Shield<SEXP>(Rcpp::wrap(col_skip)), Shield<SEXP>(Rcpp::wrap(keepbytes)), Shield<SEXP>(Rcpp::wrap(keepoffset)));
+            rcpp_result_gen = p_multiBed4(Shield<SEXP>(Rcpp::wrap(fileName)), Shield<SEXP>(Rcpp::wrap(N)), Shield<SEXP>(Rcpp::wrap(P)), Shield<SEXP>(Rcpp::wrap(weights)), Shield<SEXP>(Rcpp::wrap(pbin)), Shield<SEXP>(Rcpp::wrap(nbin)), Shield<SEXP>(Rcpp::wrap(col_skip_pos)), Shield<SEXP>(Rcpp::wrap(col_skip)), Shield<SEXP>(Rcpp::wrap(keepbytes)), Shield<SEXP>(Rcpp::wrap(keepoffset)), Shield<SEXP>(Rcpp::wrap(trace)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

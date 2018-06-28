@@ -2,8 +2,8 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' Mutiply a bed file with a vector with p-value thresholds bins
-multiBed4 <- function(fileName, N, P, weights, pbin, nbin, col_skip_pos, col_skip, keepbytes, keepoffset) {
-    .Call('_crosspred_multiBed4', PACKAGE = 'crosspred', fileName, N, P, weights, pbin, nbin, col_skip_pos, col_skip, keepbytes, keepoffset)
+multiBed4 <- function(fileName, N, P, weights, pbin, nbin, col_skip_pos, col_skip, keepbytes, keepoffset, trace) {
+    .Call('_crosspred_multiBed4', PACKAGE = 'crosspred', fileName, N, P, weights, pbin, nbin, col_skip_pos, col_skip, keepbytes, keepoffset, trace)
 }
 
 # Register entry points for exported C++ functions

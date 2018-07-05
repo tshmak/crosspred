@@ -1,22 +1,18 @@
-plink.parse <- function(bfile, out, plink, 
-                        keep=NULL, remove=NULL, 
-                        extract=NULL, exclude=NULL, 
-                        chr=NULL, 
+plink.parse <- function(parsed, out, plink, 
                         pheno=NULL, 
                         covar=NULL, 
                         ..., 
-                        parsed=NULL, 
                         details=FALSE) {
   
 
   #' @rdname plink.parse
   #' @title parse options parsed to PLINK
-  #' @param pheno Phenotype. see details.
   #' @param out The \code{--out} option in plink
-  #' @param keep,remove,extract,exclude,chr see parseselect() 
-  #' @param covar Covariates. see details
   #' @param plink plink executive 
+  #' @param pheno Phenotype. see details.
+  #' @param covar Covariates. see details
   #' @param ... Other parameters to pass to plink. See details
+  #' 
   #' @export
   #' @details \code{pheno} and \code{covar} can take one of three formats:
   #'          \itemize{
@@ -47,27 +43,21 @@ plink.parse <- function(bfile, out, plink,
   options <- list(...)
   options$keep.allele.order <- ""
   options$allow.no.sex <- ""
-  options$bfile <- bfile
-  
-  #### parse ####
-  if(is.null(parsed)) {
-    parsed <- parseselect(bfile=bfile, extract=extract, exclude=exclude, 
-                          keep=keep, remove=remove, chr=chr, export=TRUE)
-  }
+  options$bfile <- parsed$bfile
   
   #### keep ####
   if(!is.null(parsed$keep)) {
-    if(is.null(parsed$fam)) parsed$fam <- read.table2(parsed$famfile) 
+    if(is.null(parsed$fam)) parsed$fam <- lassosum:::read.table2(parsed$famfile) 
     tokeep <- tempfile("lassosum")
-    write.table2(parsed$fam[parsed$keep,], file=tokeep)
+    lassosum:::write.table2(parsed$fam[parsed$keep,], file=tokeep)
     options$keep <- tokeep
   }
   
   #### extract ####
   if(!is.null(parsed$extract)) {
-    if(is.null(parsed$bim)) parsed$bim <- read.table2(parsed$bimfile) 
+    if(is.null(parsed$bim)) parsed$bim <- lassosum:::read.table2(parsed$bimfile) 
     toextract <- tempfile("lassosum")
-    write.table2(parsed$bim[parsed$extract,], file=toextract)
+    lassosum:::write.table2(parsed$bim[parsed$extract,], file=toextract)
     options$extract <- toextract
   }
   

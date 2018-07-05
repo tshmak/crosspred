@@ -5,6 +5,7 @@ cp.plink.linear <- function(bfile, nfolds=5, fold=NULL,
                             chr=NULL, 
                             force=FALSE, 
                             fast=TRUE, 
+                            trace=1, 
                             ...) {
   #' @title Generate summary statistics for cross-prediction
   #' @param nfolds Number of folds
@@ -99,11 +100,16 @@ cp.plink.linear <- function(bfile, nfolds=5, fold=NULL,
     } else {
       training2 <- training
     }
+    if(trace > 0) {
+      cat("Processing fold ", i, "\n")
+    }
     result[[i]] <- plink.linear(bfile=bfile, 
                                 pheno=pheno[training2],
                                 covar=covar[training2,],
                                 keep = training, 
-                                extract= parsed$extract, ...)
+                                extract= parsed$extract, 
+                                trace=trace-1, 
+                                ...)
   }
   
   cor <- lapply(result, function(x) x$BETA)

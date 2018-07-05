@@ -75,7 +75,7 @@ pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, r
   if(is.null(parsed$extract)) {
     extract2 <- list(integer(0), integer(0))
   } else {
-    extract2 <- selectregion(!parsed$extract)
+    extract2 <- lassosum:::selectregion(!parsed$extract)
     extract2[[1]] <- extract2[[1]] - 1
   }
 

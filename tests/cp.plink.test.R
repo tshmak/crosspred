@@ -1,7 +1,7 @@
 clear()
 Tim.load(mysimtools)
-Tim.load(Rplink)
-Tim.load(lassosum)
+# Tim.load(Rplink)
+Tim.load(lassosum, export_all=F)
 load_all(attachroot("~/WORK/Projects/validation/crosspred/."))
 
 filename <- Rfilename("test", seed=1234)

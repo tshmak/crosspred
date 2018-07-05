@@ -90,7 +90,7 @@ cp.lassosum <- function(cp.plink.linear,
       if(is.null(ss$keep)) {
         fold.test <- ss$fold
       } else {
-        fold.test <- rep(0, ss$n)
+        fold.test <- ss$keep * 0
         fold.test[ss$keep] <- ss$fold
       }
       

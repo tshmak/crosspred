@@ -13,7 +13,7 @@ pval.thresh.old <- function(pvals, p.thresholds, beta, bfile,
   nlevels <- nlevels(cut)
   
   parsed <- parseselect(bfile, extract, exclude, keep, remove, chr)
-  groups <- group.blocks(parseblocks(1:parsed$p), parsed, mem.limit, chunks, cluster)
+  groups <- lassosum:::group.blocks(lassosum:::parseblocks(1:parsed$p), parsed, mem.limit, chunks, cluster)
   nchunks <- length(unique(groups$chunks.blocks))
   if(trace > 0) cat("Genotype divided into", nchunks, "chunks\n")
   

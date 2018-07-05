@@ -1,0 +1,5 @@
+Tim.load(lassosum, export_all=F)
+devtools::load_all(".")
+bfile <- paste0(system.file("data", package="lassosum"), "/refpanel")
+test <- plink.clump(runif(ncol.bfile(bfile)), bfile=bfile)
+strr(test, 12)

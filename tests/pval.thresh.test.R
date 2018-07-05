@@ -1,7 +1,7 @@
 clear()
-Tim.load(Rplink)
+# Tim.load(Rplink)
 setwd(attachroot("~/WORK/Projects/validation/crosspred/tests"))
-Tim.load(lassosum)
+Tim.load(lassosum, export_all=F)
 load_all()
 
 library(data.table)

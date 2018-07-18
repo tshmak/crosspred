@@ -1,4 +1,4 @@
-Cross prediction using lassosum 
+Cross prediction for PGS in large cohorts
 =======================
   
 Cross prediction is a method for calculating polygenic scores in large cohorts without the use of summary statistics. For details, refer to this [paper](https://www.biorxiv.org/content/early/2018/01/23/252270). 
@@ -7,10 +7,8 @@ _Note: In the earlier version of the paper (prior to July, 2018), two methods of
 
 # Installation
 
-If **lassosum** is not yet installed, refer to the instruction [here](https://github.com/tshmak/lassosum#installation) for installation. If **lassosum** is not already loaded, load it via: 
-```r
-library(lassosum)
-```
+If **lassosum** is not yet installed, refer to the instruction [here](https://github.com/tshmak/lassosum#installation) for installation. **lassosum** v0.4.0 or above is required. 
+
 Install `crosspred` using `devtools` (Note: Windows users need to have installed [Rtools](https://cran.r-project.org/bin/windows/Rtools/).): 
 ```r
 # install.packages("devtools") # If devtools not yet installed. 
@@ -28,6 +26,7 @@ We assume that we have genotype in PLINK 1 [format](https://www.cog-genomics.org
 
 We illustrate `crosspred` using the toy example PLINK dataset that comes with the `lassosum` package: 
 ```r
+library(lassosum) 
 setwd(system.file("data", package="lassosum"))
 random.pheno <- rnorm(nrow.bfile("testsample")) # A random phenotype
 pl <- cp.plink.linear("testsample", pheno=random.pheno, nfold=2) 

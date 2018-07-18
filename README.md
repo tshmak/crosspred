@@ -52,6 +52,9 @@ help(cp.lassosum)
 ```
 or email me at <tshmak@hku.hk>. 
 
+### Multi-threading 
+Both `cp.plink.linear` and `cp.lassosum` can be run much quicker by multi-threading. For `cp.plink.linear`, multi-threading is performed by PLINK. For this to work, we need the experimental [PLINK 2](https://www.cog-genomics.org/plink/2.0/). For `cp.lassosum`, we can specify the `cluster` option. 
+
 ### Running cross-prediction using separated .bed files
 In large datasets, data is often stored across chromosomes in separate `.bed` files. To run cross prediction across different chromosomes, simply run `cp.plink.linear` separately for the different `.bed` files, then run `cp.lassosum` separately for each output from `cp.plink.linear`, specifying `list.of.lpipe.output=TRUE`. This will generate a list of `lassosum.pipeline` objects for each fold. However, **remember to set the random number seed to the same number before you run `cp.plink.linear` so that the folds are defined consistently, and also before `cp.lassosum` if your sample size is > `max.ref.bfile.n`, so that the same reference sample is chosen!** Then, use `organize.by.fold` to reorganize the all the outputs for the different chromosomes. Finally, run `cp.lassosum` with the `list.of.lpipe.input` option. Below is an example for two chromosomes. 
 ```r

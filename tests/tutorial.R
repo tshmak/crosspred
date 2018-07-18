@@ -1,0 +1,6 @@
+# setwd("~/WORK/Projects/validation/crosspred/")
+load_all(".")
+library(lassosum)
+setwd(system.file("data", package="lassosum"))
+random.pheno <- rnorm(nrow.bfile("testsample"))
+pl <- cp.plink.linear("testsample", pheno=random.pheno, fold=2)

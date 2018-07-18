@@ -29,7 +29,8 @@ plink.clump <- function(bfile, pvals,
     ### parallel by chromosome ###
     nclusters <- length(cluster)
     if(is.null(parsed$bim)) parsed$bim <- lassosum:::read.table2(parsed$bimfile)
-    chrs <- unique(parsed$bim$V1)
+    if(is.null(parsed$extract)) bim <- parsed$bim else bim <- parsed$bim[parsed$extract,]
+    chrs <- unique(bim$V1)
     chrs <- sub("^chr", "", chrs, ignore.case = TRUE)
     if(nclusters > 1 && length(chrs) > 1) {
       cmd <- plink.clump(bfile=bfile, pvals, 

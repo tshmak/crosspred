@@ -1,15 +1,15 @@
 cp.meta <- function(cp.plink.linear, 
                     cor, chr=NULL, pos=NULL, snp=NULL, 
                     A1=NULL, A2=NULL, 
-                    n=NULL, nonmiss=NULL,
+                    nonmiss=NULL, weight.pl=NULL, 
                     exclude.ambiguous=TRUE) {
   #' Function to meta-analyse raw data summary statistics with external
   #' summary statistics
   #' @param cp.plink.linear An \code{cp.plink.linear} object
   #' @param cor,chr,pos,snp,A1,A2 see \code{\link{lassosum.pipeline}}
-  #' @param n Sample size
-  #' @param nonmiss A vector of the number of non-missing observations
-  #' @note Either \code{n} or \code{nonmiss} must be specified
+  #' @param nonmiss Number of non-missing observations (can be either a scalar or a vector)
+  #' @param weight.pl An arbitrary weight between 0 and 1 given to the plink.linear correlation
+  #' @note Either \code{n} or \code{nonmiss} or \code{weight.pl} must be specified
   #' @param exclude.ambiguous Should ambiguous SNPs be excluded? 
   #' @details This function performs a meta-analysis of the correlations 
   #' coefficients as calculated in \code{cp.plink.linear} and some external 
@@ -48,11 +48,7 @@ cp.meta <- function(cp.plink.linear,
   }
   stopifnot(is.null(A1) || length(A1) == length(cor))
   stopifnot(is.null(A2) || length(A2) == length(cor))
-  
-  if(length(n) > 1) {
-    stop("n should be a constant. Use nonmiss for a vector of number of non-missing observations.")
-  }
-  
+
   ### ss ###
   ss <- list(chr=chr, pos=pos, A1=A1, A2=A2, snp=snp, cor=cor)
   ss[sapply(ss, is.null)] <- NULL
@@ -65,26 +61,32 @@ cp.meta <- function(cp.plink.linear,
                     rm.duplicates = T, exclude.ambiguous = exclude.ambiguous, 
                     silent=T)
   
+  stopifnot(!is.null(nonmiss))
+  if(length(nonmiss) == 1) {
+    nonmiss <- rep(nonmiss, length(m$order))
+  } else {
+    stopifnot(length(nonmiss) == length(cor))
+    nonmiss <- nonmiss[m$order]
+  }
+  
   ss <- ss[m$order,]
   ss$cor <- ss$cor * m$rev
   
   ### cor ###
-  stopifnot(!is.null(nonmiss) || !is.null(n))
-  if(is.null(nonmiss)) {
-    nonmiss <- rep(n, length(m$order))
-  } else {
-    nonmiss <- nonmiss[m$order]
-  }
-  if(is.null(n)) {
-    n <- max(nonmiss)
-  }
   
   ext <- m$ref.extract
   
   for(i in 1:length(pl$cor)) {
-    N <- pl$nonmiss[[i]][ext]  + nonmiss
-    weight1 <- pl$nonmiss[[i]][ext] /  N
-    weight2 <- nonmiss / N
+    if(!is.null(weight.pl)) {
+      stopifnot(length(weight.pl) == 1 && weight.pl >= 0 && weight.pl <= 1)
+      weight1 <- weight.pl
+      weight2 <- (1-weight.pl)
+      N <- 1/(weight1^2 / pl$nonmiss[[i]][ext] + weight2^2 / nonmiss) # Supposing var(cor) = 1/N
+    } else {
+      N <- pl$nonmiss[[i]][ext]  + nonmiss
+      weight1 <- pl$nonmiss[[i]][ext] /  N
+      weight2 <- nonmiss / N
+    }
     pl$cor[[i]] <- pl$cor[[i]][ext] * weight1 + 
       ss$cor * weight2
     pl$nonmiss[[i]] <- N

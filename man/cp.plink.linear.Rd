@@ -6,7 +6,8 @@
 \usage{
 cp.plink.linear(bfile, nfolds = 5, fold = NULL, pheno = NULL,
   covar = NULL, keep = NULL, remove = NULL, extract = NULL,
-  exclude = NULL, chr = NULL, force = FALSE, fast = TRUE, ...)
+  exclude = NULL, chr = NULL, force = FALSE, fast = TRUE, trace = 1,
+  ...)
 }
 \arguments{
 \item{nfolds}{Number of folds}

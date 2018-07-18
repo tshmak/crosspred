@@ -5,11 +5,12 @@
 \title{FUnction to call plink --clump using user-supplied p-values
 A number of options not implemented here. Need to call plink() directly for those.}
 \usage{
-plink.clump(pvals, r2 = 0.2, p1 = 1, p2 = 1, kb = 250,
-  allow.overlap = F, bfile, out = tempfile("clump"), keep = NULL,
+plink.clump(bfile, pvals, r2 = 0.2, p1 = 1, p2 = 1, kb = 250,
+  allow.overlap = F, out = tempfile("clump"), keep = NULL,
   remove = NULL, extract = NULL, exclude = NULL, chr = NULL,
-  extension = ".clumped", ignore.stdout = TRUE,
-  plink = getOption("lassosum.plink"), ..., cluster = NULL)
+  extension = ".clumped", ignore.stdout = trace <= 1, trace = 0,
+  plink = getOption("lassosum.plink"), ..., parsed = NULL, cluster = NULL,
+  dryrun = FALSE)
 }
 \arguments{
 \item{pvals}{can be given as a vector (must equal number of SNPs), or

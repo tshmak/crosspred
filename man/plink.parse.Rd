@@ -8,12 +8,12 @@
 plink.linear(bfile, pheno, out = tempfile("lassosum.out"), keep = NULL,
   remove = NULL, extract = NULL, exclude = NULL, chr = NULL,
   covar = NULL, plink.cmd = NULL, extension = NULL,
-  ignore.stdout = TRUE, plink = getOption("lassosum.plink"),
-  plink2 = grepl("plink2$", plink), ...)
+  ignore.stdout = trace <= 0, trace = 0,
+  plink = getOption("lassosum.plink"), plink2 = grepl("plink2$", plink),
+  ..., parsed = NULL)
 
-plink.parse(bfile, out, plink, keep = NULL, remove = NULL, extract = NULL,
-  exclude = NULL, chr = NULL, pheno = NULL, covar = NULL, ...,
-  parsed = NULL, details = FALSE)
+plink.parse(parsed, out, plink, pheno = NULL, covar = NULL, ...,
+  details = FALSE)
 }
 \arguments{
 \item{pheno}{Phenotype. see details.}

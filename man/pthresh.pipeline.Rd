@@ -4,11 +4,12 @@
 \alias{pthresh.pipeline}
 \title{Run p-value thresholding to create a lassosum.pipeline object}
 \usage{
-pthresh.pipeline(beta = cor, pvals, p.thresholds = c(seq(0.05, 0.99, by =
-  0.01), 10^(seq(-20, -2)), 5 * 10^(seq(-20, -2))), chr = NULL, pos = NULL,
-  snp = NULL, A1 = NULL, A2 = NULL, test.bfile = NULL, trace = 1,
-  exclude.ambiguous = TRUE, keep.test = NULL, remove.test = NULL,
-  cluster = NULL, destandardize = FALSE, cor = NULL, ...)
+pthresh.pipeline(beta = cor, pvals, p.thresholds = c(seq(0.01, 0.99, by =
+  0.01), 10^(seq(-20, -2)), 5 * 10^(seq(-20, -2))), clump = F,
+  clump.options = NULL, chr = NULL, pos = NULL, snp = NULL, A1 = NULL,
+  A2 = NULL, test.bfile = NULL, trace = 1, exclude.ambiguous = TRUE,
+  keep.test = NULL, remove.test = NULL, cluster = NULL,
+  destandardize = FALSE, cor = NULL, ...)
 }
 \value{
 A \code{lassosum.pipeline} object

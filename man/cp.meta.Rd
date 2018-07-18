@@ -6,7 +6,7 @@
 summary statistics}
 \usage{
 cp.meta(cp.plink.linear, cor, chr = NULL, pos = NULL, snp = NULL,
-  A1 = NULL, A2 = NULL, n = NULL, nonmiss = NULL,
+  A1 = NULL, A2 = NULL, nonmiss = NULL, weight.pl = NULL,
   exclude.ambiguous = TRUE)
 }
 \arguments{
@@ -14,9 +14,9 @@ cp.meta(cp.plink.linear, cor, chr = NULL, pos = NULL, snp = NULL,
 
 \item{cor, chr, pos, snp, A1, A2}{see \code{\link{lassosum.pipeline}}}
 
-\item{n}{Sample size}
+\item{nonmiss}{Number of non-missing observations (can be either a scalar or a vector)}
 
-\item{nonmiss}{A vector of the number of non-missing observations}
+\item{weight.pl}{An arbitrary weight between 0 and 1 given to the plink.linear correlation}
 
 \item{exclude.ambiguous}{Should ambiguous SNPs be excluded?}
 }
@@ -34,5 +34,5 @@ correlations. If correlation coefficients are not available, these
 can be converted from p-values using \code{\link{p2cor}}.
 }
 \note{
-Either \code{n} or \code{nonmiss} must be specified
+Either \code{n} or \code{nonmiss} or \code{weight.pl} must be specified
 }

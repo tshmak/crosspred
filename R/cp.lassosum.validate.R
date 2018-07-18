@@ -50,7 +50,7 @@ cp.lassosum.validate <- function(list.of.lpipe, # by fold
     
     # pseudovalidation
     if(pseudovalidation) {
-      pv[[i]] <- pseudovalidate.lassosum.pipeline(l[[i]], 
+      pv[[i]] <- pseudovalidate(l[[i]], 
                                                   trace=trace, plot=plot, 
                                                   cluster=cluster)
       best.pgs.pv[ss$fold == i] <- pv[[i]]$best.pgs
@@ -68,7 +68,7 @@ cp.lassosum.validate <- function(list.of.lpipe, # by fold
       m2 <- list()
       m2.pgs <- rep(NA, length(ss$pheno.by.fold[[i]]))
       for(ii in 1:2) {
-        m2[[ii]] <- validate.lassosum.pipeline(l[[i]], pheno=pheno2[[ii]], 
+        m2[[ii]] <- validate(l[[i]], pheno=pheno2[[ii]], 
                                                trace=trace, plot=plot, 
                                                validate.function=validate.function, 
                                                cluster=cluster)
@@ -94,7 +94,7 @@ cp.lassosum.validate <- function(list.of.lpipe, # by fold
   ll <- l[[1]]
   ll$pgs <- pgs
   ll$keep.test <- ss$keep
-  v <- validate.lassosum.pipeline(ll, pheno=pheno, trace=trace-1, plot=plot,
+  v <- validate(ll, pheno=pheno, trace=trace-1, plot=plot,
                                   validate.function = validate.function, 
                                   cluster=cluster)
   

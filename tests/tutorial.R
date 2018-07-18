@@ -1,6 +1,10 @@
-# setwd("~/WORK/Projects/validation/crosspred/")
+setwd("~/WORK/Projects/validation/crosspred/")
 load_all(".")
 library(lassosum)
 setwd(system.file("data", package="lassosum"))
 random.pheno <- rnorm(nrow.bfile("testsample"))
-pl <- cp.plink.linear("testsample", pheno=random.pheno, fold=2)
+pl <- cp.plink.linear("testsample", pheno=random.pheno, nfold=2)
+# plot(pl$cor[[1]], pl$cor[[2]])
+
+ldblocks <- data.table::fread("Berisa.EUR.hg19.bed")
+cp <- cp.lassosum(pl, LDblocks = ldblocks)

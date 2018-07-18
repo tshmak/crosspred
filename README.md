@@ -11,31 +11,37 @@ If **lassosum** is not yet installed, refer to the instruction [here](https://gi
 ```r
 library(lassosum)
 ```
-Some functions in **crosspred** use [Plink](https://www.cog-genomics.org/plink2/) to calculate summary statistics. Before these functions can be used, the link to the plink executable needs to be specified by: 
-```r
-options(lassosum.plink='/path/to/plink')
-```
-
 Install `crosspred` using `devtools` (Note: Windows users need to have installed [Rtools](https://cran.r-project.org/bin/windows/Rtools/).): 
 ```r
 # install.packages("devtools") # If devtools not yet installed. 
 devtools::install_github("tshmak/crosspred")
 ```
 
+Some functions in **crosspred** use [Plink](https://www.cog-genomics.org/plink2/) to calculate summary statistics. Before these functions can be used, the link to the plink executable needs to be specified by: 
+```r
+options(lassosum.plink='/path/to/plink')
+```
+
 # Tutorial
 
 We assume that we have genotype in PLINK 1 [format](https://www.cog-genomics.org/plink/1.9/input#bed). For example, let's say our data files are: `mydata.bed`, `mydata.bim`, and `mydata.fam`. 
 
-We first carry out summary statistics estimation for the different folds. This can be easily done by
+We illustrate `crosspred` using the toy example PLINK dataset that comes with the `lassosum` package: 
 ```r
-sumstats <- cp.plink.linear(bfile="mydata")
+setwd(system.file("data", package="lassosum"))
+random.pheno <- rnorm(nrow.bfile("testsample")) # A random phenotype
+pl <- cp.plink.linear("testsample", pheno=random.pheno, nfold=2) 
+  # This generates the cp.plink.linear object to be used for cross-prediction.
+# plot(pl$cor[[1]], pl$cor[[2]]) # The correlation statistics for the two folds can be obtained thus. 
 ```
 The default is 5-fold cross-prediction. The folds are randomly assigned to the samples. Use `nfolds` to specify the number of folds needed, or `fold` to allocate the fold yourself. Type `help(cp.plink.linear)` for more details. 
 
 `sumstats` can then be fed into `cp.lassosum`. 
 ```r 
-ld <- read.table(system.file("data/Berisa.EUR.hg19.bed", package="lassosum"), header=T)
-cp <- cp.lassosum(sumstats, LDblocks=ld)
+ldblocks <- data.table::fread("Berisa.EUR.hg19.bed")
+cp <- cp.lassosum(pl, LDblocks = ldblocks)
+# plot(cp$pheno, cp$best.pgs) # This is the best PGS using Method 1 (Stack and validate)
+# plot(cp$pheno, cp$best.pgs.m2) # This is the best PGS using Method 2 (Split-validation)
 ```
 We recommend you use one of the LD blocks given in `lassosum`, if you do not have your own LD blocks defined. These LD blocks are given by the paper [Berisa and Pickrell (2015)](https://academic.oup.com/bioinformatics/article/32/2/283/1743626/Approximately-independent-linkage-disequilibrium), and are based on the 1000 Genome data. Replace EUR with ASN or AFR for Asian or African LD regions, respectively. hg38 coordinates are also available by [liftOver](https://genome.sph.umich.edu/wiki/LiftOver). Simply replace `hg19` with `hg38` above. 
 

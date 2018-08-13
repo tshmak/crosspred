@@ -1,4 +1,5 @@
 cp.lassosum <- function(cp.plink.linear, 
+                        ...,
                         LDblocks=cp.plink.linear$chr, 
                         pseudovalidation=FALSE,
                         Method2=TRUE, 
@@ -16,8 +17,7 @@ cp.lassosum <- function(cp.plink.linear,
                         cluster=NULL, 
                         list.of.lpipe.output=FALSE, 
                         list.of.lpipe.input=NULL, 
-                        pipeline.FUN=lassosum.pipeline, 
-                        ...) {
+                        pipeline.FUN=lassosum.pipeline) {
   #' @title lassosum with cross-prediction
   #' @description We assume correlations are pre-calculated for the various 
   #' folds, using PLINK or otherwise (cos PLINK is a lot faster).

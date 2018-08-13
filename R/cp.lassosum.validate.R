@@ -42,7 +42,7 @@ cp.lassosum.validate <- function(list.of.lpipe, # by fold
   # Initialize 
   m2.fold <- best.pgs.pv <- best.pgs.m2 <- pheno <- fold <- rep(NA, ss$n)
   M2 <- pv <- list()
-  M2.beta <- numeric(0)
+  PV.beta <- M2.beta <- numeric(0)
   
   ### Loop over folds
   nfolds <- length(ss$pheno.by.fold)
@@ -50,10 +50,10 @@ cp.lassosum.validate <- function(list.of.lpipe, # by fold
     
     # pseudovalidation
     if(pseudovalidation) {
-      pv[[i]] <- pseudovalidate(l[[i]], 
-                                                  trace=trace, plot=plot, 
-                                                  cluster=cluster)
-      best.pgs.pv[ss$fold == i] <- pv[[i]]$best.pgs
+      pv[[i]] <- pseudovalidate(l[[i]], trace=trace, plot=plot, 
+                                cluster=cluster)
+      best.pgs.pv[ss$fold == i] <- Scale(pv[[i]]$best.pgs, scale)
+      PV.beta <- cbind(PV.beta, pv[[i]]$best.beta)
     }
     
     # Method 2
@@ -111,7 +111,10 @@ cp.lassosum.validate <- function(list.of.lpipe, # by fold
               best.beta=Beta,
               best.lambda=v$best.lambda, 
               best.s=v$best.s)
-  if(pseudovalidation) tab$best.pgs.pv <- best.pgs.pv
+  if(pseudovalidation) {
+    tab$best.pgs.pv <- best.pgs.pv
+    tab$best.beta.pv <- PV.beta
+  }
   if(Method2) {
     tab$m2.fold <- m2.fold
     tab$best.pgs.m2 <- best.pgs.m2

@@ -4,8 +4,9 @@
 \alias{pgs.pthresh}
 \title{Internal engine for polygenic scores with p-value thresholding}
 \usage{
-pgs.pthresh(weights, bfile, keep = NULL, extract = NULL, exclude = NULL,
-  remove = NULL, chr = NULL, cluster = NULL, trace = 0)
+\method{pgs}{pthresh}(weights, bfile, keep = NULL, extract = NULL,
+  exclude = NULL, remove = NULL, chr = NULL, cluster = NULL,
+  trace = 0)
 }
 \arguments{
 \item{weights}{A pthresh object!!! (I use this name to trick validate.lassosum.pipeline)}

@@ -10,7 +10,7 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Includes: Rcpp
-LinkingTo: Rcpp, RcppArmadillo
+LinkingTo: Rcpp, RcppArmadillo, lassosum
 Depends: 
     lassosum (>= 0.4.0)
 Imports:

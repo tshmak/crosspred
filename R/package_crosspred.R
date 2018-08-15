@@ -3,6 +3,6 @@
 #' @docType package
 #' @name crosspred
 #' @importFrom Rcpp evalCpp
-#' @useDynLib crosspred
+#' @useDynLib crosspred 
 #' @name crosspred
 NULL

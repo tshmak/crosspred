@@ -6,6 +6,24 @@ multiBed4 <- function(fileName, N, P, weights, pbin, nbin, col_skip_pos, col_ski
     .Call('_crosspred_multiBed4', PACKAGE = 'crosspred', fileName, N, P, weights, pbin, nbin, col_skip_pos, col_skip, keepbytes, keepoffset, trace)
 }
 
+#' An overall beta for cross-prediction 
+#' 
+#' @param fileName location of bam file
+#' @param N number of subjects 
+#' @param P number of positions 
+#' @param col_skip_pos which variants should we skip
+#' @param col_skip which variants should we skip
+#' @param keepbytes which bytes to keep
+#' @param keepoffset what is the offset
+#' @param pred The expected prediction
+#' @param meanbeta mean beta in the cross-prediction
+#' @return an armadillo vector
+#' @keywords internal
+#' 
+overallbeta <- function(fileName, N, P, col_skip_pos, col_skip, keepbytes, keepoffset, pred, meanbeta, save = "", load = "") {
+    .Call('_crosspred_overallbeta', PACKAGE = 'crosspred', fileName, N, P, col_skip_pos, col_skip, keepbytes, keepoffset, pred, meanbeta, save, load)
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call('_crosspred_RcppExport_registerCCallable', PACKAGE = 'crosspred')

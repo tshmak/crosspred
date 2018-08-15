@@ -4,16 +4,18 @@
 \alias{cp.lassosum}
 \title{lassosum with cross-prediction}
 \usage{
-cp.lassosum(cp.plink.linear, LDblocks = cp.plink.linear$chr,
+cp.lassosum(cp.plink.linear, ..., LDblocks = cp.plink.linear$chr,
   pseudovalidation = FALSE, Method2 = TRUE, scale = TRUE,
   ref.bfile = NULL, destandardize = FALSE, max.ref.bfile.n = 5000,
   details = FALSE, keep.ref = NULL, exclude.ambiguous = FALSE,
   validate.function = function(x, y) cor(x, y, use = "complete"),
   plot = FALSE, trace = 1, cluster = NULL, list.of.lpipe.output = FALSE,
-  list.of.lpipe.input = NULL, pipeline.FUN = lassosum.pipeline, ...)
+  list.of.lpipe.input = NULL, pipeline.FUN = lassosum.pipeline)
 }
 \arguments{
 \item{cp.plink.linear}{An object from cp.plink.linear()}
+
+\item{...}{Other parameters to pass to lassosum.pipeline()}
 
 \item{LDblocks}{LD blocks. See \code{\link{lassosum.pipeline}}}
 
@@ -46,8 +48,6 @@ cp.lassosum(cp.plink.linear, LDblocks = cp.plink.linear$chr,
 \item{list.of.lpipe.output}{logical. see details.}
 
 \item{list.of.lpipe.input}{A list of lassosum.pipeline organized by fold.}
-
-\item{...}{Other parameters to pass to lassosum.pipeline()}
 }
 \value{
 A \code{cp.lassosum} object with the following elements

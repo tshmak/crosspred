@@ -18,9 +18,11 @@
 #include <iostream>
 #include <cmath>
 #include <RcppArmadillo.h>
+#include <lassosum.h>
 
 // [[Rcpp::depends(RcppArmadillo)]]
 using namespace Rcpp;
+using namespace lassosum;
 
 /**
  	Opens a Plink binary files
@@ -225,4 +227,46 @@ arma::mat multiBed4(const std::string fileName, int N, int P,
 
   arma::mat result2 = cumsum(result, 1);
   return result2;
+}
+
+//' An overall beta for cross-prediction 
+//' 
+//' @param fileName location of bam file
+//' @param N number of subjects 
+//' @param P number of positions 
+//' @param col_skip_pos which variants should we skip
+//' @param col_skip which variants should we skip
+//' @param keepbytes which bytes to keep
+//' @param keepoffset what is the offset
+//' @param pred The expected prediction
+//' @param meanbeta mean beta in the cross-prediction
+//' @return an armadillo vector
+//' @keywords internal
+//' 
+// [[Rcpp::export]]
+arma::vec overallbeta(const std::string fileName, int N, int P,
+                      arma::Col<int> col_skip_pos, arma::Col<int> col_skip, 
+                      arma::Col<int> keepbytes, arma::Col<int> keepoffset, // const int fillmissing
+                      arma::vec pred, arma::vec meanbeta, 
+                      const std::string save = "", const std::string load = "") {
+  
+  arma::mat X = genotypeMatrix(fileName, N, P, col_skip_pos, col_skip,
+                               keepbytes, keepoffset, 1);
+
+// arma::mat X = arma::mat(N, P, arma::fill::zeros);
+  
+  arma::mat inv; 
+  if(load == "") {
+    inv = arma::pinv(X);
+    if(save != "") inv.save(save); 
+  } 
+  else {
+    inv.load(load);
+  }
+  
+  arma::vec Xmeanbeta = X * meanbeta; 
+  arma::vec right = inv * (Xmeanbeta -  pred); 
+  arma::vec result = meanbeta - right; 
+  
+  return result;
 }

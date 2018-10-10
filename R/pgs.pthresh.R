@@ -12,7 +12,7 @@
 #'
 
 #' @export
-pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, remove=NULL,
+.pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, remove=NULL,
                    chr=NULL, cluster=NULL, trace=0) {
 
   beta <- weights$beta
@@ -25,8 +25,8 @@ pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, r
   stopifnot(max(pbin) < nbin)
 
   if(length(bfile) > 1) {
-    call <- match.call()
-    return(do.call("pgs.vec", as.list(call[-1])))
+    pgs.vec(bfile=bfile, weights=weights, extract=extract, exclude=exclude, 
+            keep=keep, remove=remove, chr=chr, cluster=cluster, trace=trace)
   }
 
   stopifnot(is.numeric(beta))
@@ -48,7 +48,7 @@ pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, r
         # Too many clusters
         f <- 1e8 / compute.size
         recommended <- min(ceiling(nclusters / f), nclusters - 1)
-        return(pgs(weights, bfile, keep=parsed$keep, extract=parsed$extract,
+        return(pgs(bfile, weights, keep=parsed$keep, extract=parsed$extract,
                    cluster=cluster[1:recommended], trace=trace))
       }
       Bfile <- bfile # Define this within the function so that it is copied
@@ -64,7 +64,7 @@ pgs.pthresh <- function(weights, bfile, keep=NULL, extract=NULL, exclude=NULL, r
         obj$beta <- beta[touse]
         obj$pbin <- pbin[touse]
 
-        return(pgs(obj, Bfile, keep=parsed$keep, extract=toextract, trace=trace))
+        return(pgs(Bfile, obj, keep=parsed$keep, extract=toextract, trace=trace))
       })
       result <- l[[1]]
       if(nclusters > 1) for(i in 2:nclusters) result <- result + l[[i]]

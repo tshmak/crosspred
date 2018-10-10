@@ -26,12 +26,14 @@ pthresh.pipeline <- function(beta=cor, pvals,
   # if(destandardize) stop("destandardization not supported in pthresh.pipeline.")
   
   #### Parse ####
-  results <- lassosum.pipeline(cor = beta, chr=chr, pos=pos, snp=snp,
+  scale <- max(abs(beta)) * 2 # Trick to bypass correlation checking
+  results <- lassosum.pipeline(cor = beta / scale, chr=chr, pos=pos, snp=snp,
                              A1=A1, A2=A2, test.bfile=test.bfile,
                              trace=trace, exclude.ambiguous = exclude.ambiguous,
                              keep.test=keep.test, remove.test=remove.test,
                              destandardize = destandardize,
                              s=numeric(0), ...) # This is just for parsing!!!
+  results$sumstats$cor <- results$sumstats$cor * scale
   ss <- results$sumstats
 
   #### pval.thresh ####
@@ -70,8 +72,8 @@ pthresh.pipeline <- function(beta=cor, pvals,
       ss.test.bim$order <- 1:nrow(ss.test.bim)
       opts$pvals <- Pvals
       opts$extract <- results$test.extract
-      opts$trace <- trace - 1
     }
+    opts$trace <- trace - 1
     tab <- do.call(plink.clump, opts)
     ss.test.bim$toexclude <- ss.test.bim$order < Inf & !(ss.test.bim$V2 %in% tab$SNP)
     Pvals[ss.test.bim$toexclude] <- 1

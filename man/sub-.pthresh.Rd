@@ -4,7 +4,8 @@
 \alias{[.pthresh}
 \title{Subsetting a matrix of p-value threshold betas}
 \usage{
-\method{[}{pthresh}(obj, row = 1:length(obj$beta), col = 1:obj$nbin)
+\method{[}{pthresh}(obj, row = 1:length(obj$beta), col = 1:obj$nbin,
+  pthresh = FALSE)
 }
 \description{
 Subsetting a matrix of p-value threshold betas

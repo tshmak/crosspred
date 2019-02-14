@@ -9,8 +9,9 @@ cp.lassosum(cp.plink.linear, ..., LDblocks = cp.plink.linear$chr,
   ref.bfile = NULL, destandardize = FALSE, max.ref.bfile.n = 5000,
   details = FALSE, keep.ref = NULL, exclude.ambiguous = FALSE,
   validate.function = function(x, y) cor(x, y, use = "complete"),
-  plot = FALSE, trace = 1, cluster = NULL, list.of.lpipe.output = FALSE,
-  list.of.lpipe.input = NULL, pipeline.FUN = lassosum.pipeline)
+  plot = FALSE, trace = 1, cluster = NULL,
+  list.of.lpipe.output = FALSE, list.of.lpipe.input = NULL,
+  pipeline.FUN = lassosum.pipeline)
 }
 \arguments{
 \item{cp.plink.linear}{An object from cp.plink.linear()}

@@ -9,4 +9,7 @@ cp.cv.list(list.of.cp.pl, cp.lassosum, ...)
 \value{
 A lassosum.pipeline object
 }
+\description{
+cp.cv for a list of cp.plink.linear objects
+}
 \keyword{internal}

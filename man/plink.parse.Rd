@@ -9,8 +9,8 @@ plink.linear(bfile, pheno, out = tempfile("lassosum.out"), keep = NULL,
   remove = NULL, extract = NULL, exclude = NULL, chr = NULL,
   covar = NULL, plink.cmd = NULL, extension = NULL,
   ignore.stdout = trace <= 0, trace = 0,
-  plink = getOption("lassosum.plink"), plink2 = grepl("plink2$", plink),
-  ..., parsed = NULL)
+  plink = getOption("lassosum.plink"), plink2 = grepl("plink2$",
+  plink), ..., parsed = NULL)
 
 plink.parse(parsed, out, plink, pheno = NULL, covar = NULL, ...,
   details = FALSE)
@@ -39,6 +39,11 @@ plink.parse(parsed, out, plink, pheno = NULL, covar = NULL, ...,
 \item{plink}{plink executive}
 
 \item{...}{Other parameters to pass to plink. See details}
+}
+\description{
+Obtain standardized coefficients from linear regression in PLINK
+
+parse options parsed to PLINK
 }
 \details{
 \code{pheno} and \code{covar} can take one of three formats:

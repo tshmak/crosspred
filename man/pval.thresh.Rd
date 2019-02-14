@@ -4,9 +4,9 @@
 \alias{pval.thresh}
 \title{Fast way to do p-value thresholding (without looping over the thresholds)}
 \usage{
-pval.thresh(pvals, p.thresholds, beta, bfile, keep = NULL, remove = NULL,
-  extract = NULL, exclude = NULL, chr = NULL, cluster = NULL,
-  trace = 0)
+pval.thresh(pvals, p.thresholds, beta, bfile, keep = NULL,
+  remove = NULL, extract = NULL, exclude = NULL, chr = NULL,
+  cluster = NULL, trace = 0)
 }
 \description{
 Fast way to do p-value thresholding (without looping over the thresholds)

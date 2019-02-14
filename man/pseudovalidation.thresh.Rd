@@ -34,6 +34,9 @@ pseudovalidation.thresh(bfile, beta, cor, sd = NULL, keep = NULL,
 \value{
 the results of the pseudovalidation, i.e. \eqn{f(\lambda)}
 }
+\description{
+Performs `pseudovalidation' to select the best p-value threshold in PGS
+}
 \details{
 A function to calculate  
 \deqn{f(\lambda)=\beta'r/\sqrt{\beta'X'X\beta}} 

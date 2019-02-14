@@ -4,8 +4,8 @@
 \alias{overallbeta}
 \title{An overall beta for cross-prediction}
 \usage{
-overallbeta(fileName, N, P, col_skip_pos, col_skip, keepbytes, keepoffset, pred,
-  meanbeta, save = "", load = "")
+overallbeta(fileName, N, P, col_skip_pos, col_skip, keepbytes, keepoffset,
+  pred, meanbeta, save = "", load = "")
 }
 \arguments{
 \item{fileName}{location of bam file}

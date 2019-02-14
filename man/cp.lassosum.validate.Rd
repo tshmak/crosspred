@@ -4,9 +4,9 @@
 \alias{cp.lassosum.validate}
 \title{For a list of cp.plink.linear objects}
 \usage{
-cp.lassosum.validate(list.of.lpipe, cp.plink.linear, Method2, pseudovalidation,
-  scale = TRUE, plot, validate.function, cluster, trace, details,
-  list.of.bfiles)
+cp.lassosum.validate(list.of.lpipe, cp.plink.linear, Method2,
+  pseudovalidation, scale = TRUE, plot, validate.function, cluster,
+  trace, details, list.of.bfiles)
 }
 \description{
 For a list of cp.plink.linear objects

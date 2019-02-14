@@ -16,3 +16,6 @@ cp.cv(cp.plink.linear, cp.lassosum, return.lpipe = FALSE, ...)
 \value{
 A validate.lassosum.pipeline object
 }
+\description{
+Perform cross-validation based on results from cross-prediction
+}

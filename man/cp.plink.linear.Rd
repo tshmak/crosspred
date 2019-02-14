@@ -6,8 +6,8 @@
 \usage{
 cp.plink.linear(bfile, nfolds = 5, fold = NULL, pheno = NULL,
   covar = NULL, keep = NULL, remove = NULL, extract = NULL,
-  exclude = NULL, chr = NULL, force = FALSE, fast = TRUE, trace = 1,
-  ...)
+  exclude = NULL, chr = NULL, force = FALSE, fast = TRUE,
+  trace = 1, ...)
 }
 \arguments{
 \item{nfolds}{Number of folds}
@@ -36,6 +36,9 @@ A \code{cp.plink.linear} object with the following elements
 \item{p}{Number of variants included}
 \item{nonmiss}{A list of vectors of number of non-missing samples used by fold}
 \item{bfile}{The bfile used}
+}
+\description{
+Generate summary statistics for cross-prediction
 }
 \details{
 If fast == TRUE, the summary statistics are calculated for 

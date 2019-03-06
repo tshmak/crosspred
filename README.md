@@ -50,7 +50,7 @@ For further options, please see the manual
 ```r
 help(cp.lassosum)
 ```
-or email me at <tshmak@hku.hk>. 
+or email me at <timmak@yahoo.com>. 
 
 ### Multi-threading 
 Both `cp.plink.linear` and `cp.lassosum` can be run much quicker by multi-threading. For `cp.plink.linear`, multi-threading is performed by PLINK. For this to work, we need the experimental [PLINK 2](https://www.cog-genomics.org/plink/2.0/). For `cp.lassosum`, we can specify the `cluster` option. 
@@ -94,7 +94,7 @@ Note that not all of the variables `chr`, `pos`, `snp`, `A1`, `A2` need to be sp
 ### Using clumping and thresholding instead of lassosum
 There is an equivalent function `cp.pthresh` for running cross-prediction using clumping and p-value thresholding instead of lassosum. Refer to the documentation for details. 
 
-Please email me <tshmak@hku.hk> for any bug reports, comments, or suggestions. Thanks for using **crosspred**!
+Please email me <timmak@yahoo.com> for any bug reports, comments, or suggestions. Thanks for using **crosspred**!
 
 
 

@@ -51,7 +51,7 @@ cp.plink.linear <- function(bfile, nfolds=5, fold=NULL,
   
   #### pheno ####
   if(is.null(pheno)) {
-    if(is.null(parsed$fam)) parsed$fam <- read.table2(parsed$famfile)
+    if(is.null(parsed$fam)) parsed$fam <- lassosum:::read.table2(parsed$famfile)
     pheno <- parsed$fam[,6]
     if(!is.null(parsed$keep)) pheno <- pheno[parsed$keep]
   } else {

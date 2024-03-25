@@ -18,7 +18,7 @@ cp.meta <- function(cp.plink.linear,
   
   pl <- cp.plink.linear
 
-  ref.bim <- read.table2(paste0(pl$bfile, ".bim"))
+  ref.bim <- lassosum:::read.table2(paste0(pl$bfile, ".bim"))
   ref.bim$V1 <- as.character(sub("^chr", "", ref.bim$V1, ignore.case = T))
   if(!is.null(pl$extract)) ref.bim <- ref.bim[pl$extract, ]
   
